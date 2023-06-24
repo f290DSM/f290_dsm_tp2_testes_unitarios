@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import kotlin.Pair;
 import okhttp3.Call;
@@ -41,7 +40,7 @@ public class HttpManagerTest {
         Response response = new Response.Builder()
                 .request(mockRequest)
                 .protocol(Protocol.HTTP_2)
-                .code(401) // status code
+                .code(200)
                 .message("")
                 .body(ResponseBody.create("{\"code\":200, \"message\":\"Lorem ipsum dolor sit amet.\"}",
                         MediaType.parse("\"application/json; charset=utf-8\"")))
@@ -58,7 +57,7 @@ public class HttpManagerTest {
         // ASSERT
         assertDoesNotThrow(() -> sut.sendGetRequest(url));
         assertTrue(optional.isPresent());
-        assertEquals(401, optional.get().getFirst());
+        assertEquals(200, optional.get().getFirst());
         assertFalse(optional.get().getSecond().isEmpty());
 
         
