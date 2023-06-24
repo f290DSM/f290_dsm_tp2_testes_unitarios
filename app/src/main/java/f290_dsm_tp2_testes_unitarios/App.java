@@ -3,12 +3,30 @@
  */
 package f290_dsm_tp2_testes_unitarios;
 
+import java.util.Optional;
+
+import f290_dsm_tp2_testes_unitarios.managers.HttpManager;
+import kotlin.Pair;
+import okhttp3.OkHttpClient;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        OkHttpClient client = new OkHttpClient();
+        HttpManager manager = new HttpManager(client);
+        try {
+            Optional<Pair<Integer, String>> optionalResponse = manager.sendGetRequest("https://api.hgbrasil.com/weather");
+            optionalResponse.ifPresent(response -> {
+                System.out.println(response.getFirst());
+                System.out.println(response.getSecond());
+            });
+            
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

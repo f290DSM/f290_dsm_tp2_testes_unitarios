@@ -26,6 +26,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
     testImplementation("org.mockito:mockito-junit-jupiter:5.3.1")
 
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+
 }
 
 application {

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 public class EstanteTest {
 
@@ -35,7 +36,8 @@ public class EstanteTest {
     
     @DisplayName("Deve criar com sucesso uma estante sem nenhum livro")
     @Test
-    void testCriarEstante() {
+    void testCriarEstante(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
         // Arrange
         Estante estante = new Estante();
 
@@ -47,15 +49,16 @@ public class EstanteTest {
     }
 
     @Test
-    void testAdicionarLivro() {
+    void testAdicionarLivro(TestInfo testInfo) {
+        System.out.println(testInfo.getDisplayName());
         // Arrange
         Estante estante = new Estante();
 
         // Act
-        estante.adicionarLivro(new Livro("Pai Pobre Pai Rico"));
+        estante.adicionarLivro(new Livro("Pai Pobre Pai Rico"), new Livro("Pai Pobre Pai Rico"));
 
         // Assert
         Assertions.assertFalse(estante.getLivros().isEmpty());
-        Assertions.assertEquals(1, estante.getLivros().size());
+        Assertions.assertEquals(2, estante.getLivros().size());
     }
 }
